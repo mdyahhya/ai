@@ -38,8 +38,8 @@ const KNOWLEDGE_BASE = [
 
     {
         id: "shadow_browser",
-        topics: ["shadow browser", "privacy browser", "android browser", "ad blocking", "tracker", "fingerprint", "dark mode", "incognito", "shadow.dominal.in"],
-        content: `Shadow Browser (shadow.dominal.in) is Yahya's flagship product — a privacy-first Android browser featuring 98%+ ad blocking, zero data collection, tracker and fingerprint blocking, a pure black dark mode, incognito-by-default browsing, and 24 dedicated privacy features. It is one of the most complete privacy-focused Android browsers built independently.`
+        topics: ["shadow browser", "privacy browser", "android browser", "ad blocking", "tracker", "fingerprint", "dark mode", "incognito", "shadow.yahya.in"],
+        content: `Shadow Browser (shadow.yahya.in) is Yahya's flagship product — a privacy-first Android browser featuring 98%+ ad blocking, zero data collection, tracker and fingerprint blocking, a pure black dark mode, incognito-by-default browsing, and 24 dedicated privacy features. It is one of the most complete privacy-focused Android browsers built independently.`
     },
 
     {
@@ -81,7 +81,7 @@ const KNOWLEDGE_BASE = [
     {
         id: "links",
         topics: ["website", "portfolio", "link", "contact", "linkedin", "github", "pypi", "url", "social media", "find online", "reach", "email"],
-        content: `Yahya's key online links: Portfolio — https://yahya.in | Company — https://dominal.in | Shadow Browser — https://shadow.dominal.in | Dominal AI — https://ai.dominal.in | AI PPT Maker — https://ppt.yahya.in | PyPI Library — https://pypi.org/project/pydefine | LinkedIn — https://www.linkedin.com/in/yahyamundewadi | College — https://vvpengineering.org | Email — yahyabuilds@gmail.com`
+        content: `Yahya's key online links: Portfolio — https://yahya.in | Company — https://dominal.in | Shadow Browser — https://shadow.yahya.in | Dominal AI — https://ai.dominal.in | AI PPT Maker — https://ppt.yahya.in | PyPI Library — https://pypi.org/project/pydefine | LinkedIn — https://www.linkedin.com/in/yahyamundewadi | College — https://vvpengineering.org | Email — yahyabuilds@gmail.com`
     }
 
 ];
