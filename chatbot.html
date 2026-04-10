@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Load custom data first -->
     <script src="customData.js"></script>
+    <!-- Markdown renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 
     <title>Dominal AI - Chat Interface</title>
 
@@ -776,6 +778,89 @@
                 position: relative;
             }
         }
+
+        /* ── MARKDOWN PROSE STYLES ── */
+        .prose { line-height: 1.75; color: var(--text-primary); }
+        .prose p { margin: 0 0 12px 0; }
+        .prose p:last-child { margin-bottom: 0; }
+        .prose h1,.prose h2,.prose h3,.prose h4 {
+            font-weight: 700; color: #ffffff; margin: 18px 0 8px;
+            line-height: 1.3;
+        }
+        .prose h1 { font-size: 1.4em; }
+        .prose h2 { font-size: 1.2em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
+        .prose h3 { font-size: 1.05em; }
+        .prose h4 { font-size: 0.95em; color: rgba(255,255,255,0.8); }
+        .prose ul, .prose ol { padding-left: 22px; margin: 8px 0 12px; }
+        .prose li { margin: 5px 0; }
+        .prose ul li { list-style-type: disc; }
+        .prose ol li { list-style-type: decimal; }
+        .prose li > ul, .prose li > ol { margin: 4px 0; }
+        .prose strong { color: #ffffff; font-weight: 700; }
+        .prose em { color: rgba(255,255,255,0.85); font-style: italic; }
+        .prose code {
+            font-family: 'Consolas','Fira Code','Courier New', monospace;
+            font-size: 0.88em;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 5px;
+            padding: 2px 6px;
+            color: #a8d8a8;
+        }
+        .prose pre {
+            background: #0d1117;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        .prose pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            font-size: 0.9em;
+            color: #e2e8f0;
+        }
+        .prose blockquote {
+            border-left: 3px solid var(--accent-color);
+            padding: 8px 16px;
+            margin: 12px 0;
+            background: rgba(16,163,127,0.06);
+            border-radius: 0 8px 8px 0;
+            color: rgba(255,255,255,0.75);
+            font-style: italic;
+        }
+        .prose a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(16,163,127,0.4);
+            word-break: break-all;
+        }
+        .prose a:hover { border-bottom-color: var(--accent-color); }
+        .prose table {
+            width: 100%; border-collapse: collapse; margin: 12px 0;
+            font-size: 0.9em;
+        }
+        .prose th {
+            background: rgba(255,255,255,0.06);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 10px 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            text-align: left;
+        }
+        .prose td {
+            padding: 9px 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.85);
+        }
+        .prose tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+        .prose hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 16px 0;
+        }
     </style>
 </head>
 
@@ -841,6 +926,26 @@
     </div>
 
     <script>
+        // ============================================================
+        // MARKDOWN PARSER (uses marked.js)
+        // ============================================================
+
+        function parseMarkdown(text) {
+            if (typeof marked === 'undefined') {
+                // Fallback: basic line-break handling if marked hasn't loaded
+                return text
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/\n/g, '<br>');
+            }
+            marked.setOptions({
+                breaks: true,       // newlines → <br>
+                gfm: true,          // GitHub Flavored Markdown
+                headerIds: false,
+                mangle: false
+            });
+            return marked.parse(text);
+        }
+
         // ============================================================
         // RAG retrieval engine loaded from customData.js (retrieveContext)
         // ============================================================
@@ -1006,8 +1111,13 @@
             }
 
             const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-            messageContent.textContent = content;
+            messageContent.className = role === 'assistant' ? 'message-content prose' : 'message-content';
+            if (role === 'assistant') {
+                messageContent.innerHTML = parseMarkdown(content);
+            } else {
+                // User messages: plain text, but preserve newlines
+                messageContent.innerText = content;
+            }
 
             message.appendChild(avatar);
 
@@ -1208,16 +1318,26 @@
 
             const systemPrompt = `You are Dominal AI — a smart, friendly personal AI assistant representing Yahya Mundewadi and his company Dominal Tech.
 
-Your personality:
-- Speak in a confident, knowledgeable, first-person-adjacent voice ("Yahya has...", "He built...")
+**Your personality:**
+- Speak in a confident, knowledgeable voice ("Yahya has...", "He built...")
 - Be concise and accurate. Never make up facts.
 - If a question is outside the knowledge base, say: "I don't have specific information on that, but feel free to reach out to Yahya at yahyabuilds@gmail.com or visit yahya.in."
-- Format responses clearly. Use line breaks for readability.
 - Never roleplay as Yahya himself — you are his AI assistant.
 
+**Formatting rules — ALWAYS follow these:**
+- Use **markdown** in every response.
+- Use **bold** for key names, terms, and headlines.
+- Use bullet points (- item) or numbered lists for any list of items, features, steps, or projects.
+- Use ## or ### headings to separate distinct sections when answering multi-part questions.
+- Use \`inline code\` for technical terms, URLs, and package names.
+- Add a blank line between paragraphs and list blocks for breathing room.
+- Use > blockquote for quotes, tips, or highlighted notes.
+- Never dump everything into one long paragraph — always break it up.
+- Keep responses concise but complete. Avoid unnecessary filler.
+
 ${contextBlock
-    ? `RELEVANT KNOWLEDGE RETRIEVED FOR THIS QUERY:\n${contextBlock}\n\nAnswer using the above context. If the answer is fully covered, stick to it.`
-    : `No specific knowledge chunk matched. Answer using general knowledge about Yahya: He is a full-stack developer, Android engineer, Python developer, and AI engineer from Solapur, India. CEO of Dominal Tech (dominal.in). Contact: yahyabuilds@gmail.com | Portfolio: yahya.in`
+    ? `## Retrieved Knowledge\n\n${contextBlock}\n\nAnswer using the above context. Stick to it — do not invent details outside it.`
+    : `No specific knowledge matched. Use this fallback:\n\nYahya Mundewadi is a full-stack developer, Android engineer, Python developer, and AI engineer from Solapur, India. CEO of **Dominal Tech** (dominal.in). Contact: \`yahyabuilds@gmail.com\` | Portfolio: \`yahya.in\``
 }`;
 
             // Build messages array for API (system + last 6 turns for context window)
