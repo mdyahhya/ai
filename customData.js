@@ -50,8 +50,8 @@ const KNOWLEDGE_BASE = [
 
     {
         id: "ppt_maker",
-        topics: ["ppt maker", "ai ppt", "presentation", "slides", "pdf", "ppt.yahya.in", "central railway", "government project"],
-        content: `Yahya built the AI PPT Maker (available at ppt.yahya.in), a conversational AI agent that generates complete presentation slides from a topic, tone, and page count, and exports them as downloadable PDFs and PPTX files. A live deployment was done for Central Railway (Indian Government), making it one of his most significant real-world deployments.`
+        topics: ["ppt maker", "ai ppt", "presentation", "slides", "pdf", "ppt.yahya.in"],
+        content: `Yahya built the AI PPT Maker (available at ppt.yahya.in), a conversational AI agent that generates complete presentation slides from a topic, tone, and page count, and exports them as downloadable PDFs and PPTX files.`
     },
 
     {
@@ -123,4 +123,4 @@ function retrieveContext(userQuery, topN = 3) {
         .filter(item => item.score > 0)
         .slice(0, topN)
         .map(item => item.chunk);
-}
+}s
