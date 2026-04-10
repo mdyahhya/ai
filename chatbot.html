@@ -12,36 +12,51 @@
     <title>Dominal AI - Chat Interface</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ── LIGHT MODE (default) ── */
+        :root {
+            --bg-primary:        #ffffff;
+            --bg-secondary:      #f4f4f5;
+            --bg-sidebar:        #f9f9f9;
+            --bg-hover:          #ebebeb;
+            --bg-chat-user:      #f4f4f5;
+            --bg-chat-assistant: #ffffff;
+            --text-primary:      #0f172a;
+            --text-secondary:    #64748b;
+            --text-sidebar:      #1e293b;
+            --text-assistant:    #0f172a;
+            --border-color:      rgba(0,0,0,0.08);
+            --accent-color:      #10a37f;
+            --accent-hover:      #0d8f6f;
+            --danger-color:      #ef4444;
+            --danger-hover:      #dc2626;
+            --shadow:            0 1px 4px rgba(0,0,0,0.07);
         }
 
-        :root {
-            --bg-primary: #000000;
-            --bg-secondary: #0a0a0a;
-            --bg-sidebar: #000000;
-            --bg-hover: #1a1a1a;
-            --bg-chat-user: #0a0a0a;
-            --bg-chat-assistant: #000000;
-            --text-primary: #ffffff;
-            --text-secondary: #999999;
-            --text-sidebar: #ececf1;
-            --text-assistant: #ffffff;
-            --border-color: #2a2a2a;
-            --accent-color: #10a37f;
-            --accent-hover: #0d8f6f;
-            --danger-color: #ef4444;
-            --danger-hover: #dc2626;
+        /* ── DARK MODE override ── */
+        body.dark {
+            --bg-primary:        #0f0f0f;
+            --bg-secondary:      #1a1a1a;
+            --bg-sidebar:        #0f0f0f;
+            --bg-hover:          #252525;
+            --bg-chat-user:      #1a1a1a;
+            --bg-chat-assistant: #0f0f0f;
+            --text-primary:      #f1f5f9;
+            --text-secondary:    #94a3b8;
+            --text-sidebar:      #ececf1;
+            --text-assistant:    #f1f5f9;
+            --border-color:      rgba(255,255,255,0.08);
+            --shadow:            0 1px 4px rgba(0,0,0,0.4);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             height: 100vh;
             overflow: hidden;
+            transition: background 0.3s, color 0.3s;
         }
 
         .app-container {
@@ -54,8 +69,8 @@
 
         .sidebar {
             width: 280px;
-            background: #000000;
-            border-right: 1px solid #2a2a2a;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             height: 100vh;
@@ -63,7 +78,7 @@
             left: 0;
             top: 0;
             z-index: 1000;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s;
         }
 
         /* Desktop: Always visible, never moves */
@@ -93,14 +108,14 @@
 
         .sidebar-header {
             padding: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .new-chat-btn {
             width: 100%;
             padding: 12px 16px;
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border-color);
             color: var(--text-sidebar);
             border-radius: 8px;
             font-size: 14px;
@@ -154,7 +169,7 @@
         .delete-chat-btn {
             background: transparent;
             border: none;
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-secondary);
             cursor: pointer;
             padding: 4px;
             font-size: 16px;
@@ -172,7 +187,7 @@
 
         .sidebar-footer {
             padding: 12px 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
             color: var(--text-sidebar);
             font-size: 12px;
             flex-shrink: 0;
@@ -180,7 +195,7 @@
 
         .model-info {
             padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--bg-hover);
             border-radius: 6px;
             margin-bottom: 6px;
         }
@@ -237,13 +252,13 @@
 
         .model-version {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
         .creator-info {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--text-secondary);
             margin-top: 8px;
         }
 
@@ -259,8 +274,8 @@
             height: 100vh;
             position: relative;
             z-index: 1;
-            transition: margin-left 0.3s ease;
-            background: #000000;
+            transition: margin-left 0.3s ease, background 0.3s;
+            background: var(--bg-primary);
         }
 
         /* Desktop: Add margin for sidebar */
@@ -283,8 +298,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #000000;
+            background: var(--bg-primary);
             z-index: 2;
+            transition: background 0.3s;
         }
 
         .menu-btn {
@@ -319,7 +335,8 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            background: #000000;
+            background: var(--bg-primary);
+            transition: background 0.3s;
         }
 
         .empty-state {
@@ -329,7 +346,7 @@
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
-            background: #000000;
+            background: var(--bg-primary);
         }
 
         .logo-container {
@@ -371,20 +388,21 @@
 
         .chat-messages {
             flex: 1;
-            background: #000000;
+            background: var(--bg-primary);
         }
 
         .message-wrapper {
             border-bottom: 1px solid var(--border-color);
             padding: 24px 0;
+            transition: background 0.3s;
         }
 
         .message-wrapper.user {
-            background: #0a0a0a;
+            background: var(--bg-chat-user);
         }
 
         .message-wrapper.assistant {
-            background: #000000;
+            background: var(--bg-chat-assistant);
         }
 
         .message {
@@ -471,7 +489,7 @@
         .typing-dot {
             width: 8px;
             height: 8px;
-            background: rgba(255, 255, 255, 0.6);
+            background: var(--text-secondary);
             border-radius: 50%;
             animation: typing 1.4s infinite;
         }
@@ -501,8 +519,9 @@
 
         .input-container {
             padding: 24px;
-            background: #000000;
+            background: var(--bg-primary);
             border-top: 1px solid var(--border-color);
+            transition: background 0.3s;
         }
 
         .input-wrapper {
@@ -852,15 +871,36 @@
         }
         .prose td {
             padding: 9px 14px;
-            border: 1px solid rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.85);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
         }
-        .prose tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+        .prose tr:nth-child(even) td { background: var(--bg-secondary); }
         .prose hr {
             border: none;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border-color);
             margin: 16px 0;
         }
+
+        /* ── DARK MODE TOGGLE BUTTON ── */
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s, border-color 0.25s, transform 0.3s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover { background: var(--bg-hover); transform: scale(1.08); }
+        .theme-toggle svg { transition: transform 0.4s ease, opacity 0.3s ease; }
+        .theme-toggle .icon-moon { display: none; }
+        body.dark .theme-toggle .icon-sun  { display: none; }
+        body.dark .theme-toggle .icon-moon { display: block; }
     </style>
 </head>
 
@@ -890,8 +930,23 @@
             <div class="top-bar">
                 <button class="menu-btn" id="menuBtn">☰</button>
                 <div class="top-bar-title">Dominal AI Assistant</div>
-                <button class="chat-close-btn" id="chatCloseBtn">✕</button>
-                <div style="width: 32px;"></div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle dark / light mode">
+                        <!-- Sun icon (shown in light mode) -->
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <!-- Moon icon (shown in dark mode) -->
+                        <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                    <button class="chat-close-btn" id="chatCloseBtn">✕</button>
+                </div>
             </div>
 
             <div class="chat-container" id="chatContainer">
@@ -926,6 +981,24 @@
     </div>
 
     <script>
+        // ============================================================
+        // DARK MODE TOGGLE
+        // ============================================================
+        (function () {
+            const saved = localStorage.getItem('dominalTheme');
+            if (saved === 'dark') document.body.classList.add('dark');
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const btn = document.getElementById('themeToggle');
+                if (!btn) return;
+                btn.addEventListener('click', () => {
+                    document.body.classList.toggle('dark');
+                    localStorage.setItem('dominalTheme',
+                        document.body.classList.contains('dark') ? 'dark' : 'light');
+                });
+            });
+        })();
+
         // ============================================================
         // MARKDOWN PARSER (uses marked.js)
         // ============================================================
