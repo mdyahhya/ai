@@ -50,8 +50,8 @@ const KNOWLEDGE_BASE = [
 
     {
         id: "ppt_maker",
-        topics: ["ppt maker", "ai ppt", "presentation", "slides", "pdf", "ppt.yahya.in", "ai.dominal.in/ppt", "central railway", "government project"],
-        content: `Yahya built the AI PPT Maker (available at ppt.yahya.in and ai.dominal.in/ppt), a conversational AI agent that generates complete presentation slides from a topic, tone, and page count, and exports them as downloadable PDFs and PPTX files. A live deployment was done for Central Railway (Indian Government), making it one of his most significant real-world deployments.`
+        topics: ["ppt maker", "ai ppt", "presentation", "slides", "pdf", "ppt.yahya.in", "central railway", "government project"],
+        content: `Yahya built the AI PPT Maker (available at ppt.yahya.in), a conversational AI agent that generates complete presentation slides from a topic, tone, and page count, and exports them as downloadable PDFs and PPTX files. A live deployment was done for Central Railway (Indian Government), making it one of his most significant real-world deployments.`
     },
 
     {
@@ -81,7 +81,7 @@ const KNOWLEDGE_BASE = [
     {
         id: "links",
         topics: ["website", "portfolio", "link", "contact", "linkedin", "github", "pypi", "url", "social media", "find online", "reach", "email"],
-        content: `Yahya's key online links: Portfolio — https://yahya.in | Company — https://dominal.in | Shadow Browser — https://shadow.dominal.in | Dominal AI — https://ai.dominal.in | AI PPT Maker — https://ppt.yahya.in and https://ai.dominal.in/ppt | PyPI Library — https://pypi.org/project/pydefine | LinkedIn — https://www.linkedin.com/in/yahyamundewadi | College — https://vvpengineering.org | Email — yahyabuilds@gmail.com`
+        content: `Yahya's key online links: Portfolio — https://yahya.in | Company — https://dominal.in | Shadow Browser — https://shadow.dominal.in | Dominal AI — https://ai.dominal.in | AI PPT Maker — https://ppt.yahya.in | PyPI Library — https://pypi.org/project/pydefine | LinkedIn — https://www.linkedin.com/in/yahyamundewadi | College — https://vvpengineering.org | Email — yahyabuilds@gmail.com`
     }
 
 ];
