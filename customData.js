@@ -123,4 +123,4 @@ function retrieveContext(userQuery, topN = 3) {
         .filter(item => item.score > 0)
         .slice(0, topN)
         .map(item => item.chunk);
-}s
+}
