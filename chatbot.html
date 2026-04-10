@@ -12,7 +12,11 @@
     <title>Dominal AI - Chat Interface</title>
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         /* ── LIGHT MODE (default) ── */
         :root {
@@ -69,8 +73,8 @@
 
         .sidebar {
             width: 280px;
-            background: var(--bg-sidebar);
-            border-right: 1px solid var(--border-color);
+            background: #000000;
+            border-right: 1px solid #2a2a2a;
             display: flex;
             flex-direction: column;
             height: 100vh;
@@ -78,7 +82,7 @@
             left: 0;
             top: 0;
             z-index: 1000;
-            transition: transform 0.3s ease, background 0.3s;
+            transition: transform 0.3s ease;
         }
 
         /* Desktop: Always visible, never moves */
@@ -108,14 +112,14 @@
 
         .sidebar-header {
             padding: 12px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .new-chat-btn {
             width: 100%;
             padding: 12px 16px;
             background: transparent;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-sidebar);
             border-radius: 8px;
             font-size: 14px;
@@ -169,7 +173,7 @@
         .delete-chat-btn {
             background: transparent;
             border: none;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             padding: 4px;
             font-size: 16px;
@@ -187,7 +191,7 @@
 
         .sidebar-footer {
             padding: 12px 16px;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-sidebar);
             font-size: 12px;
             flex-shrink: 0;
@@ -195,7 +199,7 @@
 
         .model-info {
             padding: 6px 12px;
-            background: var(--bg-hover);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 6px;
             margin-bottom: 6px;
         }
@@ -252,13 +256,13 @@
 
         .model-version {
             font-size: 12px;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 2px;
         }
 
         .creator-info {
             font-size: 11px;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.4);
             margin-top: 8px;
         }
 
@@ -274,8 +278,8 @@
             height: 100vh;
             position: relative;
             z-index: 1;
-            transition: margin-left 0.3s ease, background 0.3s;
-            background: var(--bg-primary);
+            transition: margin-left 0.3s ease;
+            background: #000000;
         }
 
         /* Desktop: Add margin for sidebar */
@@ -298,9 +302,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--bg-primary);
+            background: #000000;
             z-index: 2;
-            transition: background 0.3s;
         }
 
         .menu-btn {
@@ -335,8 +338,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            background: var(--bg-primary);
-            transition: background 0.3s;
+            background: #000000;
         }
 
         .empty-state {
@@ -346,7 +348,7 @@
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
-            background: var(--bg-primary);
+            background: #000000;
         }
 
         .logo-container {
@@ -388,21 +390,20 @@
 
         .chat-messages {
             flex: 1;
-            background: var(--bg-primary);
+            background: #000000;
         }
 
         .message-wrapper {
             border-bottom: 1px solid var(--border-color);
             padding: 24px 0;
-            transition: background 0.3s;
         }
 
         .message-wrapper.user {
-            background: var(--bg-chat-user);
+            background: #0a0a0a;
         }
 
         .message-wrapper.assistant {
-            background: var(--bg-chat-assistant);
+            background: #000000;
         }
 
         .message {
@@ -489,7 +490,7 @@
         .typing-dot {
             width: 8px;
             height: 8px;
-            background: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
             animation: typing 1.4s infinite;
         }
@@ -519,9 +520,8 @@
 
         .input-container {
             padding: 24px;
-            background: var(--bg-primary);
+            background: #000000;
             border-top: 1px solid var(--border-color);
-            transition: background 0.3s;
         }
 
         .input-wrapper {
@@ -799,41 +799,100 @@
         }
 
         /* ── MARKDOWN PROSE STYLES ── */
-        .prose { line-height: 1.75; color: var(--text-primary); }
-        .prose p { margin: 0 0 12px 0; }
-        .prose p:last-child { margin-bottom: 0; }
-        .prose h1,.prose h2,.prose h3,.prose h4 {
-            font-weight: 700; color: #ffffff; margin: 18px 0 8px;
+        .prose {
+            line-height: 1.75;
+            color: var(--text-primary);
+        }
+
+        .prose p {
+            margin: 0 0 12px 0;
+        }
+
+        .prose p:last-child {
+            margin-bottom: 0;
+        }
+
+        .prose h1,
+        .prose h2,
+        .prose h3,
+        .prose h4 {
+            font-weight: 700;
+            color: #ffffff;
+            margin: 18px 0 8px;
             line-height: 1.3;
         }
-        .prose h1 { font-size: 1.4em; }
-        .prose h2 { font-size: 1.2em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
-        .prose h3 { font-size: 1.05em; }
-        .prose h4 { font-size: 0.95em; color: rgba(255,255,255,0.8); }
-        .prose ul, .prose ol { padding-left: 22px; margin: 8px 0 12px; }
-        .prose li { margin: 5px 0; }
-        .prose ul li { list-style-type: disc; }
-        .prose ol li { list-style-type: decimal; }
-        .prose li > ul, .prose li > ol { margin: 4px 0; }
-        .prose strong { color: #ffffff; font-weight: 700; }
-        .prose em { color: rgba(255,255,255,0.85); font-style: italic; }
+
+        .prose h1 {
+            font-size: 1.4em;
+        }
+
+        .prose h2 {
+            font-size: 1.2em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 4px;
+        }
+
+        .prose h3 {
+            font-size: 1.05em;
+        }
+
+        .prose h4 {
+            font-size: 0.95em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .prose ul,
+        .prose ol {
+            padding-left: 22px;
+            margin: 8px 0 12px;
+        }
+
+        .prose li {
+            margin: 5px 0;
+        }
+
+        .prose ul li {
+            list-style-type: disc;
+        }
+
+        .prose ol li {
+            list-style-type: decimal;
+        }
+
+        .prose li>ul,
+        .prose li>ol {
+            margin: 4px 0;
+        }
+
+        .prose strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .prose em {
+            color: rgba(255, 255, 255, 0.85);
+            font-style: italic;
+        }
+
         .prose code {
-            font-family: 'Consolas','Fira Code','Courier New', monospace;
+            font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
             font-size: 0.88em;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 5px;
             padding: 2px 6px;
             color: #a8d8a8;
         }
+
         .prose pre {
             background: #0d1117;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 16px 18px;
             overflow-x: auto;
             margin: 12px 0;
         }
+
         .prose pre code {
             background: transparent;
             border: none;
@@ -841,66 +900,59 @@
             font-size: 0.9em;
             color: #e2e8f0;
         }
+
         .prose blockquote {
             border-left: 3px solid var(--accent-color);
             padding: 8px 16px;
             margin: 12px 0;
-            background: rgba(16,163,127,0.06);
+            background: rgba(16, 163, 127, 0.06);
             border-radius: 0 8px 8px 0;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255, 255, 255, 0.75);
             font-style: italic;
         }
+
         .prose a {
             color: var(--accent-color);
             text-decoration: none;
-            border-bottom: 1px solid rgba(16,163,127,0.4);
+            border-bottom: 1px solid rgba(16, 163, 127, 0.4);
             word-break: break-all;
         }
-        .prose a:hover { border-bottom-color: var(--accent-color); }
+
+        .prose a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
         .prose table {
-            width: 100%; border-collapse: collapse; margin: 12px 0;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
             font-size: 0.9em;
         }
+
         .prose th {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             color: #ffffff;
             font-weight: 600;
             padding: 10px 14px;
-            border: 1px solid rgba(255,255,255,0.12);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             text-align: left;
         }
+
         .prose td {
             padding: 9px 14px;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-        .prose tr:nth-child(even) td { background: var(--bg-secondary); }
-        .prose hr {
-            border: none;
-            border-top: 1px solid var(--border-color);
-            margin: 16px 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.85);
         }
 
-        /* ── DARK MODE TOGGLE BUTTON ── */
-        .theme-toggle {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.25s, border-color 0.25s, transform 0.3s;
-            flex-shrink: 0;
+        .prose tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.03);
         }
-        .theme-toggle:hover { background: var(--bg-hover); transform: scale(1.08); }
-        .theme-toggle svg { transition: transform 0.4s ease, opacity 0.3s ease; }
-        .theme-toggle .icon-moon { display: none; }
-        body.dark .theme-toggle .icon-sun  { display: none; }
-        body.dark .theme-toggle .icon-moon { display: block; }
+
+        .prose hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 16px 0;
+        }
     </style>
 </head>
 
@@ -930,23 +982,8 @@
             <div class="top-bar">
                 <button class="menu-btn" id="menuBtn">☰</button>
                 <div class="top-bar-title">Dominal AI Assistant</div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <button class="theme-toggle" id="themeToggle" title="Toggle dark / light mode">
-                        <!-- Sun icon (shown in light mode) -->
-                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"/>
-                            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                        </svg>
-                        <!-- Moon icon (shown in dark mode) -->
-                        <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                        </svg>
-                    </button>
-                    <button class="chat-close-btn" id="chatCloseBtn">✕</button>
-                </div>
+                <button class="chat-close-btn" id="chatCloseBtn">✕</button>
+                <div style="width: 32px;"></div>
             </div>
 
             <div class="chat-container" id="chatContainer">
@@ -981,24 +1018,6 @@
     </div>
 
     <script>
-        // ============================================================
-        // DARK MODE TOGGLE
-        // ============================================================
-        (function () {
-            const saved = localStorage.getItem('dominalTheme');
-            if (saved === 'dark') document.body.classList.add('dark');
-
-            document.addEventListener('DOMContentLoaded', () => {
-                const btn = document.getElementById('themeToggle');
-                if (!btn) return;
-                btn.addEventListener('click', () => {
-                    document.body.classList.toggle('dark');
-                    localStorage.setItem('dominalTheme',
-                        document.body.classList.contains('dark') ? 'dark' : 'light');
-                });
-            });
-        })();
-
         // ============================================================
         // MARKDOWN PARSER (uses marked.js)
         // ============================================================
@@ -1391,27 +1410,17 @@
 
             const systemPrompt = `You are Dominal AI — a smart, friendly personal AI assistant representing Yahya Mundewadi and his company Dominal Tech.
 
-**Your personality:**
-- Speak in a confident, knowledgeable voice ("Yahya has...", "He built...")
+Your personality:
+- Speak in a confident, knowledgeable, first-person-adjacent voice ("Yahya has...", "He built...")
 - Be concise and accurate. Never make up facts.
 - If a question is outside the knowledge base, say: "I don't have specific information on that, but feel free to reach out to Yahya at yahyabuilds@gmail.com or visit yahya.in."
+- Format responses clearly. Use line breaks for readability.
 - Never roleplay as Yahya himself — you are his AI assistant.
 
-**Formatting rules — ALWAYS follow these:**
-- Use **markdown** in every response.
-- Use **bold** for key names, terms, and headlines.
-- Use bullet points (- item) or numbered lists for any list of items, features, steps, or projects.
-- Use ## or ### headings to separate distinct sections when answering multi-part questions.
-- Use \`inline code\` for technical terms, URLs, and package names.
-- Add a blank line between paragraphs and list blocks for breathing room.
-- Use > blockquote for quotes, tips, or highlighted notes.
-- Never dump everything into one long paragraph — always break it up.
-- Keep responses concise but complete. Avoid unnecessary filler.
-
 ${contextBlock
-    ? `## Retrieved Knowledge\n\n${contextBlock}\n\nAnswer using the above context. Stick to it — do not invent details outside it.`
-    : `No specific knowledge matched. Use this fallback:\n\nYahya Mundewadi is a full-stack developer, Android engineer, Python developer, and AI engineer from Solapur, India. CEO of **Dominal Tech** (dominal.in). Contact: \`yahyabuilds@gmail.com\` | Portfolio: \`yahya.in\``
-}`;
+                    ? `RELEVANT KNOWLEDGE RETRIEVED FOR THIS QUERY:\n${contextBlock}\n\nAnswer using the above context. If the answer is fully covered, stick to it.`
+                    : `No specific knowledge chunk matched. Answer using general knowledge about Yahya: He is a full-stack developer, Android engineer, Python developer, and AI engineer from Solapur, India. CEO of Dominal Tech (dominal.in). Contact: yahyabuilds@gmail.com | Portfolio: yahya.in`
+                }`;
 
             // Build messages array for API (system + last 6 turns for context window)
             const historyTurns = conv.messages.slice(-6);
